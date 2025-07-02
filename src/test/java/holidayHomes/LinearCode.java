@@ -1,5 +1,6 @@
 package holidayHomes;
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -18,37 +19,54 @@ public class LinearCode {
 		WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
 		driver.get("https://www.tripadvisor.in/");
 		driver.manage().window().maximize();
-		Thread.sleep(3000);
-		WebElement searchBtn=driver.findElement(By.xpath("//input[contains(@placeholder,'Places to go')]"));
+		
+		WebElement searchBtn=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@placeholder,'Places to go')]")));
 		searchBtn.click();
 		searchBtn.sendKeys("Nairobi");
 		Actions act=new Actions(driver);
 		act.keyDown(Keys.ENTER).keyUp(Keys.ENTER).perform();
-		Thread.sleep(5000);
-		driver.findElement(By.linkText("Holiday Homes")).click();
+		
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Holiday Homes"))).click();
+		
+		act.scrollByAmount(0, 300).perform();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Guests']"))).click();
 		By addBtn=By.xpath("//button[@data-automation=\"increaseAdults\"]");
+		
 		wait.until(ExpectedConditions.elementToBeClickable(addBtn)).click();
 		driver.findElement(addBtn).click();
-		driver.findElement(By.xpath("//button[@data-automation=\"applyGuests\"]")).click();
-		act.scrollByAmount(0, 300).perform();
+		
+		driver.findElement(By.xpath("//button[@data-automation='applyGuests']")).click();
+		
 		driver.findElement(By.xpath("//div[@class='jwRbK VCdjs']//button[1]")).click();
 		for(int i=0;i<4;i++) {
-			driver.findElement(By.xpath("//button[@aria-label='Next month']//*[name()='svg']")).click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@aria-label='Next month']//*[name()='svg']"))).click();
 		}
 		
-		Thread.sleep(4000);
 		
-		driver.findElement(By.xpath("//button[@aria-label='3 December 2025']")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//button[@aria-label='8 December 2025']")).click();
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@aria-label='3 December 2025']"))).click();
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@aria-label='8 December 2025']"))).click();
 		//sorting
 		driver.findElement(By.xpath("//span[normalize-space()='Tripadvisor Sort']")).click();
 		driver.findElement(By.xpath("//span[text()='# of reviews']")).click();
-		driver.findElement(By.xpath("(//span[@class='biGQs _P XWJSj Wb'][normalize-space()='Show all'])[1]")).click();
+		driver.findElement(By.xpath("(//button[@class='UikNM _G B- _S _W _T c G_ wSSLS wnNQG LbPqG'])[2]")).click();
 		driver.findElement(By.xpath("//span[contains(text(),'Elevator/Lift access')]")).click();
 		driver.findElement(By.xpath("//span[text()='Apply']")).click();
-		//driver.quit();
+		Thread.sleep(3000);
+		
+		List<WebElement> hotelNames=driver.findElements(By.tagName("h2"));
+		List<WebElement> perDayCharge=driver.findElements(By.xpath("//*[@class=\"iCUJC b\"]"));
+		List<WebElement> totalCharge=driver.findElements(By.xpath("//*[@class=\"MvXmI\"]"));
+		
+		for(int i=0;i<3;i++) {
+			System.out.println(hotelNames.get(i).getText());
+			System.out.println(perDayCharge.get(i).getText());
+			String[] ch=totalCharge.get(i).getText().split("/");
+			System.out.println(ch[0]);
+		}
+		driver.quit();
 	}
 
 }

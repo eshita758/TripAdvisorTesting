@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-07-02T16:58:28 IST" name="Default suite" finished-at="2025-07-02T16:58:52 IST" duration-ms="23786">
+    <groups>
+    </groups>
+    <test started-at="2025-07-02T16:58:28 IST" name="Default test" finished-at="2025-07-02T16:58:52 IST" duration-ms="23786">
+      <class name="holidayHomes.TestRunner">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:holidayHomes.TestRunner@76508ed1]" started-at="2025-07-02T16:58:28 IST" name="setUp" finished-at="2025-07-02T16:58:41 IST" duration-ms="12313" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="searchLoaction()[pri:1, instance:holidayHomes.TestRunner@76508ed1]" started-at="2025-07-02T16:58:41 IST" name="searchLoaction" finished-at="2025-07-02T16:58:41 IST" duration-ms="381" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchLoaction -->
+        <test-method signature="visitHolidayHome()[pri:2, instance:holidayHomes.TestRunner@76508ed1]" started-at="2025-07-02T16:58:41 IST" name="visitHolidayHome" finished-at="2025-07-02T16:58:52 IST" duration-ms="11023" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- visitHolidayHome -->
+      </class> <!-- holidayHomes.TestRunner -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
