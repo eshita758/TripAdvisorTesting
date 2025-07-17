@@ -7,6 +7,7 @@
         <methods>
           <include name="setUp"/>
           <include name="searchLoaction"/>
+          <include name="visitHolidayHome"/>
         </methods>
       </class> <!-- holidayHomes.TestRunner -->
     </classes>

@@ -1,5 +1,6 @@
 package holidayHomes;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -15,11 +16,13 @@ public class LinearCode {
 
 	public static void main(String[] args) throws InterruptedException {
 		WebDriver driver=new EdgeDriver();
+		//Thread.sleep(4000);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-		driver.get("https://www.tripadvisor.in/");
+		driver.navigate().to("https://www.tripadvisor.in/");
+		//driver.get("https://www.tripadvisor.in/");
 		driver.manage().window().maximize();
-		
+		//Thread.sleep(10000);
 		WebElement searchBtn=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@placeholder,'Places to go')]")));
 		searchBtn.click();
 		searchBtn.sendKeys("Nairobi");
@@ -54,7 +57,7 @@ public class LinearCode {
 		driver.findElement(By.xpath("(//button[@class='UikNM _G B- _S _W _T c G_ wSSLS wnNQG LbPqG'])[2]")).click();
 		driver.findElement(By.xpath("//span[contains(text(),'Elevator/Lift access')]")).click();
 		driver.findElement(By.xpath("//span[text()='Apply']")).click();
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		
 		List<WebElement> hotelNames=driver.findElements(By.tagName("h2"));
 		List<WebElement> perDayCharge=driver.findElements(By.xpath("//*[@class=\"iCUJC b\"]"));
@@ -66,7 +69,29 @@ public class LinearCode {
 			String[] ch=totalCharge.get(i).getText().split("/");
 			System.out.println(ch[0]);
 		}
-		driver.quit();
+		Thread.sleep(2000);
+		driver.navigate().to("https://www.tripadvisor.in/Cruises");
+		WebElement searchBox=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='Jgukv _T Gi']//div[1]//div[1]//button[1]")));
+//		searchBox.sendKeys("Adventure Canada");
+		searchBox.click();
+		
+//		Adventure Canada
+		driver.findElement(By.xpath("//span[contains(text(),'American Cruise Lines')]")).click();
+		driver.findElement(By.xpath("(//button[@class=\"EVXMG _G f k Q2 u _u w Cq Ra _S wSSLS mrjkJ oweiU\"])[2]")).click();
+		
+		driver.findElement(By.xpath("//span[contains(text(),'American Star')]")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Search')]"))).click();
+		//driver.quit();
+		List<String> windowId=new ArrayList<>(driver.getWindowHandles());
+		driver.switchTo().window(windowId.get(1));
+		List<WebElement> languages=driver.findElements(By.xpath("(//*[@class='LojWi w S4'])[3]//li"));
+		for(int i=1;i<languages.size();i++) {
+			System.out.println(languages.get(i).getText());
+		}
+		String passenger=driver.findElement(By.xpath("//*[contains(text(),'Passengers:')]")).getText();
+		System.out.println(passenger);
+		String launched=driver.findElement(By.xpath("//*[contains(text(),'Launched:')]")).getText();
+		System.out.println(launched);
 	}
 
 }
